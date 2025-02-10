@@ -1,0 +1,49 @@
+data_collection:
+  description: >
+    Gather online mentions, articles, discussions, and social media posts related to {topic} from last month, given the current year is {current_year}.
+  expected_output: >
+    A structured dataset containing:
+    1. Total number of mentions about {topic}
+    2. Sources (social media platforms, news articles, blogs, forums, etc.)
+    3. Top user-generated content (tweets, posts, comments)
+    4. Any viral or widely shared posts
+    5. Notable influencers, public figures, or organizations discussing {topic}
+  agent: data_collector
+
+trend_analysis:
+  description: >
+    Identify key topics, trending hashtags, and discussion themes associated with {topic}.
+  expected_output: >
+    A trend analysis report containing:
+    1. Top 5 trending hashtags or keywords related to {topic}
+    2. Most discussed themes and narratives
+    3. Comparison with similar or related discussions
+    4. Potential controversies, misinformation, or key shifts in conversation
+    5. Key audience demographics engaging in discussions
+  agent: trend_analyzer
+
+sentiment_analysis:
+  description: >
+    Analyze audience sentiment and emotional tone behind discussions about {topic}.
+  expected_output: >
+    A sentiment report structured as:
+    1. Overall sentiment breakdown (% positive, neutral, negative)
+    2. Common positive and negative themes
+    3. Emotional analysis (e.g., excitement, anger, frustration, joy)
+    4. Notable shifts in sentiment over time
+    5. Recommendations for understanding or addressing public sentiment
+  agent: sentiment_specialist
+
+insights_generation:
+  description: >
+    Compile a comprehensive social listening report on {topic}, including key insights and actionable recommendations.
+  expected_output: >
+    A strategic report containing:
+    1. Executive Summary
+    2. Social Listening Data Overview
+    3. Trend and Topic Analysis
+    4. Sentiment Insights
+    5. Potential Risks and Opportunities
+    6. Strategic Recommendations
+    7. Conclusion
+  agent: insights_reporter
