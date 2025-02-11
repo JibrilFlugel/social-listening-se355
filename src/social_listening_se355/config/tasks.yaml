@@ -2,7 +2,7 @@ data_collection:
   description: >
     Gather online mentions, articles, discussions, and social media posts related to {topic} from last month, given the current year is {current_year}.
   expected_output: >
-    A structured dataset containing:
+    A structured dataset containing (in Vietnamese):
     1. Total number of mentions about {topic}
     2. Sources (social media platforms, news articles, blogs, forums, etc.)
     3. Top user-generated content (tweets, posts, comments)
@@ -14,7 +14,7 @@ trend_analysis:
   description: >
     Identify key topics, trending hashtags, and discussion themes associated with {topic}.
   expected_output: >
-    A trend analysis report containing:
+    A trend analysis report containing (in Vietnamese):
     1. Top 5 trending hashtags or keywords related to {topic}
     2. Most discussed themes and narratives
     3. Comparison with similar or related discussions
@@ -26,7 +26,7 @@ sentiment_analysis:
   description: >
     Analyze audience sentiment and emotional tone behind discussions about {topic}.
   expected_output: >
-    A sentiment report structured as:
+    A sentiment report structured as (in Vietnamese):
     1. Overall sentiment breakdown (% positive, neutral, negative)
     2. Common positive and negative themes
     3. Emotional analysis (e.g., excitement, anger, frustration, joy)
@@ -38,7 +38,7 @@ insights_generation:
   description: >
     Compile a comprehensive social listening report on {topic}, including key insights and actionable recommendations.
   expected_output: >
-    A strategic report containing:
+    A strategic report containing (in Vietnamese):
     1. Executive Summary
     2. Social Listening Data Overview
     3. Trend and Topic Analysis
