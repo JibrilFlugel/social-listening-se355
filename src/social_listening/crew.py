@@ -8,7 +8,7 @@ search_tool = SerperDevTool(
 	)
 
 @CrewBase
-class TestProj():
+class SL_crew():
 	"""TestProj crew"""
  
 	agents_config = 'config/agents.yaml'
@@ -44,9 +44,6 @@ class TestProj():
 			verbose=True
 		)
 
-	# To learn more about structured task outputs, 
-	# task dependencies, and task callbacks, check out the documentation:
-	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
 	@task
 	def data_collection(self) -> Task:
 		return Task(

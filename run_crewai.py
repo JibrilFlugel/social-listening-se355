@@ -1,5 +1,5 @@
 from datetime import datetime
-from social_listening_se355.crew import TestProj
+from src.social_listening.crew import SL_crew
 import os
 
 RESULTS_PATH = "results/final_report.txt" 
@@ -17,7 +17,7 @@ def run_crewai(topic):
     }
 
     try:
-        TestProj().crew().kickoff(inputs=inputs)  
+        SL_crew().crew().kickoff(inputs=inputs)  
 
         if os.path.exists(RESULTS_PATH):
             with open(RESULTS_PATH, "r", encoding="utf-8") as file:

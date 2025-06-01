@@ -1,9 +1,8 @@
-#!/usr/bin/env python
 import warnings
 
 from datetime import datetime
 
-from social_listening_se355.crew import TestProj
+from social_listening.crew import SL_crew
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -19,6 +18,6 @@ def run():
     }
     
     try:
-        TestProj().crew().kickoff(inputs=inputs)
+        SL_crew().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
