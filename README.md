@@ -13,23 +13,24 @@ This project leverages [CrewAI](https://crewai.com/), [Ollama](https://ollama.co
 
 ## Tech Stack
 
-- **[CrewAI](https://crewai.com/)** – Agent orchestration framework  
-- **[Ollama](https://ollama.com/)** – Local LLM hosting 
-- **[Serper API](https://serper.dev/)** – Google Search & News search engine  
+- **[CrewAI](https://crewai.com/)** – Agent orchestration framework
+- **[Ollama](https://ollama.com/)** – Local LLM hosting
+- **[Serper API](https://serper.dev/)** – Google Search & News search engine
 
 ## How to run
 
 Before running the project locally, ensure you have the following prerequisites set up:
 **Environment Variables**: Create a `.env` file in the root directory of the project and add the following variables (refer to `.env.example` for guidance):
-   
-   ```env
+
+```env
 //Ollama base url (Ollama uses port 11434 by default when running locally)
 API_BASE=
 //The model of your choice (make sure to pull it from Ollama first)
 MODEL=
 //Your serper api key
 SERPER_API_KEY=
-   ```
+```
+
 Once you have these prerequisites set up, follow the steps below to run the project locally:
 
 1. Clone the repository:
@@ -52,10 +53,10 @@ Once you have these prerequisites set up, follow the steps below to run the proj
      ```bash
      source venv/bin/activate
      ```
-     
+
 4. Install dependencies:
    ```bash
-   pip install crewai crewai-tools PyQt5
+   pip install -r requirements.txt
    ```
 5. Create the `.env` file and add the environment variables as mentioned above.
 
@@ -69,4 +70,3 @@ Once you have these prerequisites set up, follow the steps below to run the proj
    ```bash
    python ui.py
    ```
-
