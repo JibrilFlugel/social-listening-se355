@@ -7,9 +7,7 @@ from social_listening.crew import SL_crew
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 def run():
-    """
-    Run the crew.
-    """
+
     user_input = input("Enter the name of the topic you want to research: ")
 
     inputs = {

@@ -9,7 +9,6 @@ search_tool = SerperDevTool(
 
 @CrewBase
 class SL_crew():
-	"""TestProj crew"""
  
 	agents_config = 'config/agents.yaml'
 	tasks_config = 'config/tasks.yaml'
@@ -74,7 +73,6 @@ class SL_crew():
 
 	@crew
 	def crew(self) -> Crew:
-		"""Creates the TestProj crew"""
 
 		return Crew(
 			agents=self.agents, 

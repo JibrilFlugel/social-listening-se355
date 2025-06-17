@@ -5,11 +5,8 @@ import os
 RESULTS_PATH = "results/final_report.txt" 
 
 def run_crewai(topic):
-    """
-    Hàm chạy crewai với chủ đề từ UI và in kết quả ra màn hình
-    """
     if not topic:
-        return "❌ Chủ đề không được để trống!"
+        return "❌ Topic can't be empty!"
 
     inputs = {
         'topic': topic,
@@ -22,9 +19,9 @@ def run_crewai(topic):
         if os.path.exists(RESULTS_PATH):
             with open(RESULTS_PATH, "r", encoding="utf-8") as file:
                 result = file.read()
-                return f"✅ Kết quả phân tích chủ đề '{topic}':\n{result}"
+                return f"✅ Social listening result for '{topic}':\n{result}"
         else:
-            return f"⚠️ Không tìm thấy file kết quả: {RESULTS_PATH}"
+            return f"⚠️ Cannot find result file: {RESULTS_PATH}"
 
     except Exception as e:
-        return f"❌ Lỗi khi chạy crewai: {e}"
+        return f"❌ Error when running Crewai: {e}"
