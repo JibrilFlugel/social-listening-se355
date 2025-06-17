@@ -1,7 +1,10 @@
 # Social listening agentic system
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/53fe5291-c245-4fad-bb49-912f28adf690" />
+</p>
 A multi-agent system for analyzing public discourse using LLM and real-time data. Designed to mimic a real-world social insights team
-This project leverages [CrewAI](https://crewai.com/), [Ollama](https://ollama.com/), and the [Serper API](https://serper.dev/) to to collect, analyze, and summarize public sentiment and trends around any topic.
+
+This project leverages [CrewAI](https://crewai.com/), [Ollama](https://ollama.com/), and the [Serper API](https://serper.dev/) to collect, analyze, and summarize public sentiment and trends around any topic.
 
 ## Features
 
