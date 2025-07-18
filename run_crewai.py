@@ -2,7 +2,7 @@ from datetime import datetime
 from src.social_listening.crew import SL_crew
 import os
 
-RESULTS_PATH = "results/final_report.txt" 
+RESULTS_PATH = "results/final_insights_report.md" 
 
 def run_crewai(topic):
     if not topic:
