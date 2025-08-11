@@ -2,47 +2,48 @@ data_collection:
   description: >
     Gather online mentions, articles, discussions, and social media posts (text, images, video links) related to {topic} from the last 30 days of {current_year} using platforms like X, Reddit, Instagram, TikTok, and news APIs. Validate data quality and ensure completeness.
   expected_output: >
-    A structured dataset in 'results/raw_data.jsonl', with each line representing a mention in JSON format, containing:
-    1. content_text: The text content of the mention.
-    2. source_platform: The platform (e.g., X, Reddit, News).
-    3. author_handle: The author's username or identifier.
-    4. timestamp: The date and time of the mention.
-    5. direct_url: The URL to the original content.
-    6. engagement_metrics: Likes, shares, comments (e.g., {"likes": 123, "shares": 52, "comments": 16}).
-    7. content_type: Type of content (text, image, video).
+    A structured dataset containing (in Vietnamese):
+    1. Total number of mentions about {topic}
+    2. Sources (social media platforms, news articles, blogs, forums, etc.)
+    3. Top user-generated content (tweets, posts, comments)
+    4. Any viral or widely shared posts
+    5. Notable influencers, public figures, or organizations discussing {topic}
   agent: data_collector
 
 trend_analysis:
   description: >
     Analyze the dataset in 'results/raw_data.jsonl' to identify key topics, trending hashtags, and discussion themes associated with {topic}. Cross-reference with external trends if relevant.
   expected_output: >
-    A trend analysis report in 'results/trend_report.md' containing:
-    1. Top 5 trending hashtags and keywords (with engagement metrics, e.g., post volume, reach).
-    2. A summary of 3-4 most discussed narratives (e.g., clustered topics via NLP).
-    3. Identification of viral content (>10,000 engagements) with direct_urls.
-    4. A brief comparison with 1-2 related trending topics (e.g., {topic} vs. competitors).
-    5. Key audience demographics (age, gender, location) if available from platform analytics.
+    A trend analysis report containing (in Vietnamese):
+    1. Top 5 trending hashtags or keywords related to {topic}
+    2. Most discussed themes and narratives
+    3. Comparison with similar or related discussions
+    4. Potential controversies, misinformation, or key shifts in conversation
+    5. Key audience demographics engaging in discussions
   agent: trend_analyzer
 
 sentiment_analysis:
   description: >
     Analyze the dataset in 'results/raw_data.jsonl' to quantify sentiment and emotional tone for {topic}, focusing on shifts and key drivers. Include a visualization of sentiment trends.
   expected_output: >
-    A sentiment report in 'results/sentiment_report.md' containing:
-    1. Overall sentiment breakdown (e.g., 44% positive, 36% neutral, 20% negative, with confidence scores).
-    2. Key themes driving positive and negative sentiment (e.g., "innovation" for positive, "cost concerns" for negative).
-    3. Emotional analysis (e.g., 30% joy, 25% anger, 20% trust) using emotion detection models.
+    A sentiment report structured as (in Vietnamese):
+    1. Overall sentiment breakdown (% positive, neutral, negative)
+    2. Common positive and negative themes
+    3. Emotional analysis (e.g., excitement, anger, frustration, joy)
+    4. Notable shifts in sentiment over time
+    5. Recommendations for understanding or addressing public sentiment
   agent: sentiment_specialist
 
 insights_generation:
   description: >
     Compile a comprehensive social listening report on {topic}, integrating data from 'results/raw_data.jsonl', 'results/trend_report.md', and 'results/sentiment_report.md' to provide actionable recommendations.
   expected_output: >
-    A final strategic report in 'results/final_insights_report.md' containing:
-    1. Executive Summary: A high-level overview of findings.
-    2. Key Trends & Narratives: What are people talking about?
-    3. Audience Sentiment: How do people feel?
-    4. Notable Influencers & Sources: Who is leading the conversation?
-    5. Risks & Opportunities: Identification of potential controversies, misinformation, and untapped opportunities.
-    6. Actionable Recommendations: At least 3 concrete strategic recommendations for marketing, PR, or product development.
+    A strategic report containing (in Vietnamese):
+    1. Executive Summary
+    2. Social Listening Data Overview
+    3. Trend and Topic Analysis
+    4. Sentiment Insights
+    5. Potential Risks and Opportunities
+    6. Strategic Recommendations
+    7. Conclusion
   agent: insights_reporter

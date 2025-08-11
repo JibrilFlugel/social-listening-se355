@@ -14,9 +14,10 @@ llm = LLM(model="ollama/llama3.1", base_url="http://localhost:11434")
 
 @CrewBase
 class SL_crew():
-    """A social listening crew to analyze online conversations about a topic."""
-    agents_config = 'config/agents.yaml'
-    tasks_config = 'config/tasks.yaml'
+	"""TestProj crew"""
+ 
+	agents_config = 'config/agents.yaml'
+	tasks_config = 'config/tasks.yaml'
 
     @agent
     def data_collector(self) -> Agent:
@@ -92,12 +93,13 @@ class SL_crew():
             output_file='results/final_insights_report.md',
             expected_output="A markdown report ('results/final_insights_report.md') with executive summary, trends, sentiment, influencers, risks/opportunities, and 3+ recommendations for {topic}.",        )
 
-    @crew
-    def crew(self) -> Crew:
-        """Creates the social listening crew"""
-        return Crew(
-            agents=self.agents,
-            tasks=self.tasks,
-            process=Process.sequential,
-            verbose=True
-        )
+	@crew
+	def crew(self) -> Crew:
+		"""Creates the TestProj crew"""
+
+		return Crew(
+			agents=self.agents, 
+			tasks=self.tasks, 
+			process=Process.sequential,
+			verbose=True,
+		)
