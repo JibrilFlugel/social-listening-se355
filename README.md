@@ -28,8 +28,6 @@ Before running the project locally, ensure you have the following prerequisites 
 ```env
 //Ollama base url (Ollama uses port 11434 by default when running locally)
 API_BASE=
-//The model of your choice (make sure to pull it from Ollama first)
-MODEL=
 //Your serper api key
 SERPER_API_KEY=
 ```
