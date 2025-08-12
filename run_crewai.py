@@ -5,15 +5,12 @@ import os
 RESULTS_PATH = "results/final_insights_report.md" 
 
 def run_crewai(topic):
-    """
-    Hàm chạy crewai với chủ đề từ UI và in kết quả ra màn hình
-    """
     if not topic:
-        return "❌ Chủ đề không được để trống!"
+        return "Topic cannot be empty!"
 
     inputs = {
         'topic': topic,
-        'current_year': str(datetime.now().year)
+        'current_date': datetime.now().strftime('%Y-%m-%d')
     }
 
     try:
@@ -22,9 +19,9 @@ def run_crewai(topic):
         if os.path.exists(RESULTS_PATH):
             with open(RESULTS_PATH, "r", encoding="utf-8") as file:
                 result = file.read()
-                return f"✅ Kết quả phân tích chủ đề '{topic}':\n{result}"
+                return f"Analysis results for topic '{topic}':\n{result}"
         else:
-            return f"⚠️ Không tìm thấy file kết quả: {RESULTS_PATH}"
+            return f"Results file not found: {RESULTS_PATH}"
 
     except Exception as e:
-        return f"❌ Lỗi khi chạy crewai: {e}"
+        return f"Error running crewai: {e}"

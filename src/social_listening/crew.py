@@ -1,23 +1,24 @@
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
-from crewai_tools import SerperDevTool, FileReadTool
+from crewai_tools import SerperDevTool
+from .tools import FileReaderTool
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
+# Ensure results directory exists
+os.makedirs('results', exist_ok=True)
+
 # Instantiate tools
 search_tool = SerperDevTool(country='vn', locale='vi')
-file_read_tool_raw_data = FileReadTool(file_path='results/raw_data.jsonl')
-file_read_tool_trend = FileReadTool(file_path='results/trend_report.md')
-file_read_tool_sentiment = FileReadTool(file_path='results/sentiment_report.md')
-llm = LLM(model="ollama/llama3.1", base_url="http://localhost:11434")
+safe_file_reader = FileReaderTool()
+llm = LLM(model="ollama/qwen2.5", base_url="http://localhost:11434")
 
 @CrewBase
-class SL_crew():
-	"""TestProj crew"""
- 
-	agents_config = 'config/agents.yaml'
-	tasks_config = 'config/tasks.yaml'
+class SL_crew():    
+    agents_config = 'config/agents.yaml'
+    tasks_config = 'config/tasks.yaml'
 
     @agent
     def data_collector(self) -> Agent:
@@ -25,35 +26,38 @@ class SL_crew():
             config=self.agents_config['data_collector'],
             tools=[search_tool],
             verbose=True,
-            llm=llm
+            llm=llm,
+            max_retry_limit=2
         )
 
     @agent
     def trend_analyzer(self) -> Agent:
         return Agent(
             config=self.agents_config['trend_analyzer'],
-            tools=[file_read_tool_raw_data],
+            tools=[safe_file_reader],
             verbose=True,
-            llm=llm
+            llm=llm,
+            max_retry_limit=2
         )
 
     @agent
     def sentiment_specialist(self) -> Agent:
         return Agent(
             config=self.agents_config['sentiment_specialist'],
-            tools=[file_read_tool_raw_data],
+            tools=[safe_file_reader],
             verbose=True,
-            llm=llm
+            llm=llm,
+            max_retry_limit=2
         )
 
     @agent
     def insights_reporter(self) -> Agent:
         return Agent(
             config=self.agents_config['insights_reporter'],
-            # reads the reports from the previous agents.
-            tools=[file_read_tool_raw_data, file_read_tool_trend, file_read_tool_sentiment],
+            tools=[safe_file_reader],
             verbose=True,
-            llm=llm
+            llm=llm,
+            max_retry_limit=2
         )
 
     @task
@@ -62,7 +66,8 @@ class SL_crew():
             config=self.tasks_config['data_collection'],
             agent=self.data_collector(),
             output_file='results/raw_data.jsonl',
-            expected_output="A JSONL file ('results/raw_data.jsonl') with each line containing content_text, source_platform, author_handle, timestamp, direct_url, engagement_metrics, and content_type for {topic}.",        )
+            expected_output="A valid JSONL file with each line as a separate JSON object containing: content_text, source_platform, author_handle, timestamp, direct_url, engagement_metrics, and content_type. Minimum 10 entries required."
+        )
 
     @task
     def trend_analysis_task(self) -> Task:
@@ -71,35 +76,37 @@ class SL_crew():
             agent=self.trend_analyzer(),
             context=[self.data_collection_task()],
             output_file='results/trend_report.md',
-            expected_output="A markdown report ('results/trend_report.md') with top 5 hashtags, 3-4 narratives, viral content, comparisons, and demographics for {topic}.",        )
+            expected_output="A complete markdown report analyzing trends from the collected data. Must include: top 5 hashtags, key narratives, viral content analysis, and demographic insights."
+        )
 
     @task
     def sentiment_analysis_task(self) -> Task:
         return Task(
             config=self.tasks_config['sentiment_analysis'],
             agent=self.sentiment_specialist(),
-            # uses on the previous two tasks for full context.
-            context=[self.data_collection_task(), self.trend_analysis_task()],
+            context=[self.data_collection_task()],
             output_file='results/sentiment_report.md',
-            expected_output="A markdown report ('results/sentiment_report.md') with sentiment breakdown, themes, emotional analysis for {topic}.",        )
+            expected_output="A complete markdown report with sentiment analysis including: overall sentiment percentages, positive/negative themes, emotional drivers, and sentiment trends over time."
+        )
 
     @task
     def insights_generation_task(self) -> Task:
         return Task(
             config=self.tasks_config['insights_generation'],
             agent=self.insights_reporter(),
-            # uses the trend and sentiment reports as context.
             context=[self.trend_analysis_task(), self.sentiment_analysis_task()],
             output_file='results/final_insights_report.md',
-            expected_output="A markdown report ('results/final_insights_report.md') with executive summary, trends, sentiment, influencers, risks/opportunities, and 3+ recommendations for {topic}.",        )
+            expected_output="A comprehensive strategic report with executive summary, key findings, actionable recommendations, risks/opportunities, and strategic next steps."
+        )
 
-	@crew
-	def crew(self) -> Crew:
-		"""Creates the TestProj crew"""
+    @crew
+    def crew(self) -> Crew:
+        """Creates the Social Listening crew"""
 
-		return Crew(
-			agents=self.agents, 
-			tasks=self.tasks, 
-			process=Process.sequential,
-			verbose=True,
-		)
+        return Crew(
+            agents=self.agents, 
+            tasks=self.tasks, 
+            process=Process.sequential,
+            verbose=True,
+            max_rpm=10
+        )

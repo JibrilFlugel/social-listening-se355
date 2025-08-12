@@ -1,44 +1,29 @@
 data_collection:
   description: >
-    Gather online mentions, articles, discussions, and social media posts (text, images, video links) related to {topic} from the last 30 days of {current_year} using platforms like X, Reddit, Instagram, TikTok, and news APIs. Validate data quality and ensure completeness.
+    Use search tools to find mentions of {topic} from around {current_date}, then convert search results into valid JSONL format. Each line must be a separate JSON object with: content_text, source_platform, author_handle, timestamp, direct_url, engagement_metrics, and content_type. Extract real data from search results, create at least 10 entries.
   expected_output: >
-    A structured dataset containing (in Vietnamese):
-    1. Total number of mentions about {topic}
-    2. Sources (social media platforms, news articles, blogs, forums, etc.)
-    3. Top user-generated content (tweets, posts, comments)
-    4. Any viral or widely shared posts
-    5. Notable influencers, public figures, or organizations discussing {topic}
+    A valid JSONL file where each line is a complete JSON object containing real data extracted from search results. Focus on content from around {current_date}. No mock data, no placeholder comments, no incomplete entries.
   agent: data_collector
 
 trend_analysis:
   description: >
-    Analyze the dataset in 'results/raw_data.jsonl' to identify key topics, trending hashtags, and discussion themes associated with {topic}. Cross-reference with external trends if relevant.
+    Read 'results/raw_data.jsonl' ONCE, analyze all entries for trends, hashtags, and themes. Do not attempt to read the file multiple times. Create a comprehensive markdown report based on the data you read.
   expected_output: >
-    A trend analysis report containing (in Vietnamese):
-    1. Top 5 trending hashtags or keywords related to {topic}
-    2. Most discussed themes and narratives
-    3. Comparison with similar or related discussions
-    4. Potential controversies, misinformation, or key shifts in conversation
-    5. Key audience demographics engaging in discussions
+    A complete markdown report with trend analysis based on the raw data. Include top hashtags, key themes, viral content, and demographic insights.
   agent: trend_analyzer
 
 sentiment_analysis:
   description: >
-    Analyze the dataset in 'results/raw_data.jsonl' to quantify sentiment and emotional tone for {topic}, focusing on shifts and key drivers. Include a visualization of sentiment trends.
+    Read 'results/raw_data.jsonl' ONCE, analyze sentiment and emotions in all entries. Do not attempt to read the file multiple times. Create a comprehensive markdown report with sentiment insights.
   expected_output: >
-    A sentiment report structured as (in Vietnamese):
-    1. Overall sentiment breakdown (% positive, neutral, negative)
-    2. Common positive and negative themes
-    3. Emotional analysis (e.g., excitement, anger, frustration, joy)
-    4. Notable shifts in sentiment over time
-    5. Recommendations for understanding or addressing public sentiment
+    A complete markdown report with sentiment analysis including overall sentiment percentages, positive/negative themes, emotional drivers, and recommendations.
   agent: sentiment_specialist
 
 insights_generation:
   description: >
     Compile a comprehensive social listening report on {topic}, integrating data from 'results/raw_data.jsonl', 'results/trend_report.md', and 'results/sentiment_report.md' to provide actionable recommendations.
   expected_output: >
-    A strategic report containing (in Vietnamese):
+    A strategic report containing:
     1. Executive Summary
     2. Social Listening Data Overview
     3. Trend and Topic Analysis

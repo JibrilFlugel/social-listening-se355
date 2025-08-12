@@ -14,9 +14,8 @@ def run():
 
     inputs = {
         'topic': user_input,
-        'current_year': str(datetime.now().year)
-    }
-    
+        'current_date': datetime.now().strftime('%Y-%m-%d')
+    }    
     try:
         SL_crew().crew().kickoff(inputs=inputs)
     except Exception as e:
