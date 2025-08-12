@@ -6,11 +6,11 @@ RESULTS_PATH = "results/final_insights_report.md"
 
 def run_crewai(topic):
     if not topic:
-        return "❌ Topic can't be empty!"
+        return "Topic cannot be empty!"
 
     inputs = {
         'topic': topic,
-        'current_year': str(datetime.now().year)
+        'current_date': datetime.now().strftime('%Y-%m-%d')
     }
 
     try:
@@ -19,9 +19,9 @@ def run_crewai(topic):
         if os.path.exists(RESULTS_PATH):
             with open(RESULTS_PATH, "r", encoding="utf-8") as file:
                 result = file.read()
-                return f"✅ Social listening result for '{topic}':\n{result}"
+                return f"Analysis results for topic '{topic}':\n{result}"
         else:
-            return f"⚠️ Cannot find result file: {RESULTS_PATH}"
+            return f"Results file not found: {RESULTS_PATH}"
 
     except Exception as e:
-        return f"❌ Error when running Crewai: {e}"
+        return f"Error running crewai: {e}"

@@ -23,7 +23,7 @@ class SocialListeningApp(QWidget):
         layout = QVBoxLayout()
 
         self.input_field = QLineEdit(self)
-        self.input_field.setPlaceholderText("Enter the name of the topic you want to research:...")
+        self.input_field.setPlaceholderText("Enter topic to search...")
         layout.addWidget(self.input_field)
 
         self.search_button = QPushButton("Search", self)
@@ -41,10 +41,10 @@ class SocialListeningApp(QWidget):
     def start_search(self):
         topic = self.input_field.text().strip()
         if not topic:
-            self.result_area.setText("Topic can't be empty!")
+            self.result_area.setText("Topic cannot be empty!")
             return
 
-        self.result_area.setText("Processing...\n")
+        self.result_area.setText("Processing data...\n")
         self.worker = WorkerThread(topic)
         self.worker.result_signal.connect(self.display_result)
         self.worker.start()
